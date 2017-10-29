@@ -22,6 +22,8 @@ class CreateSourcesTable extends Migration
             $table->decimal('initial_balance', 6, 2)->default(0);
             $table->decimal('current_balance', 6, 2)->default(0);
 
+            $table->enum('type', ['Dinheiro', 'Cartão de Crédito', 'Conta Corrente', 'Empréstimo', 'Transferência']);
+
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
