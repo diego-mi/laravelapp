@@ -28,6 +28,17 @@
                         <label for="input-description">Descrição:</label>
                         <textarea name="description" id="input-description" cols="30" rows="10"
                                   class="form-control">{{isset($category) ? $category->description : ''}}</textarea>
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <ul>
+                                    @foreach ($errors->get('description') as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
 
                     <div class="form-group">
