@@ -21,6 +21,8 @@ Route::group(['prefix' => '',  'middleware' => 'auth'], function(){
     Route::resource('categories', 'CategoryController');
 
     Route::resource('sources', 'SourceController');
+
+    Route::resource('transactions', 'TransactionController');
 });
 
 Auth::routes();
