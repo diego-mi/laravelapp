@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
+use Auth;
 
 class CategoryController extends Controller
 {
@@ -13,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data['categories'] = Category::all();
+        return view('categories.list', $data);
     }
 
     /**
@@ -23,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -34,7 +37,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'user_id' => Auth::user()->id
+        ];
+
+        $save = Category::insert($category);
+
+        if ($save) {
+            return redirect('categories');
+        }
+
+        return redirect()->back()->withInput();
     }
 
     /**
@@ -56,7 +71,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['category'] = Category::find($id);
+        return view('categories.create', $data);
     }
 
     /**
@@ -68,7 +84,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'user_id' => Auth::user()->id
+        ];
+
+        $update = Category::find($id)->update($category);
+
+        if ($update) {
+            return redirect('categories');
+        }
+
+        return redirect()->back()->withInput();
     }
 
     /**
@@ -79,6 +107,15 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Category::find($id);
+
+        if ($user) {
+            $user->destroy($id);
+            $msg = 'Categoria com o id:'.$id.' foi deletada.';
+        } else {
+            $msg = 'Categoria com o id:'.$id.' não foi encontrada.';
+        }
+
+        return redirect()->back()->withSuccess($msg);
     }
 }
