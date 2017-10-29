@@ -37,16 +37,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|max:60',
+            'email' => 'required|unique:users'
+        ]);
+
         $user = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->name)
         ];
 
-        $save = User::insert($user);
-
+        $save = User::create($user);
         if ($save) {
-            return redirect('users');
+            return redirect('users/' . $save->id . '/edit')->withSuccess('O usuário ' . $save->name . ' foi criado com sucesso.');
         }
 
         return redirect()->back()->withInput();
@@ -83,6 +87,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|max:60',
+            'email' => 'required|unique:users'
+        ]);
+
         if ($request->has('password')) {
             $password = $request->password;
             $user = [
