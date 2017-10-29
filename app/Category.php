@@ -15,6 +15,16 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'user_id',
+        'name', 'description', 'user_id', 'parent_id',
     ];
+
+    public function sub_category()
+    {
+        return $this->belongsTo(self::class, 'parent_id', 'id');
+    }
+
+    public function parent_category()
+    {
+        return $this->hasMany(self::class, 'id', 'parent_id');
+    }
 }

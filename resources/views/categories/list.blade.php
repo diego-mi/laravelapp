@@ -18,6 +18,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Nome</th>
+                            <th>Categoria Pai</th>
                             <th>Descrição</th>
                             <th><a href="{{URL('categories/create')}}" class="btn btn-xs btn-success">New</a></th>
                         </tr>
@@ -25,10 +26,11 @@
                         <tbody>
                         @foreach($categories as $key => $category)
                             <tr>
-                                <td>{{($key+1)}}</td>
+                                <td width="5">{{($key+1)}}</td>
                                 <td>{{$category->name}}</td>
+                                <td>{{$category->parent_id == 0 ? '-' : $category->parent_category[0]->name}}</td>
                                 <td>{{$category->description}}</td>
-                                <td>
+                                <td width="5">
                                     <center>
                                         <a href="{{URL('categories/'.$category->id.'/edit')}}"
                                            class="btn btn-xs btn-info">Editar</a>

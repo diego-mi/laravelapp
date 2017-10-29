@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data['categories'] = Category::all();
+        $data['categories'] = Category::with('sub_category')->get();
         return view('categories.list', $data);
     }
 
@@ -26,7 +26,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        $data['categories'] = Category::where('parent_id', 0)->get();
+        return view('categories.create', $data);
     }
 
     /**
@@ -40,7 +41,8 @@ class CategoryController extends Controller
         $category = [
             'name' => $request->name,
             'description' => $request->description,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
+            'parent_id' => $request->parent_id
         ];
 
         $save = Category::insert($category);
@@ -72,6 +74,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $data['category'] = Category::find($id);
+        $data['categories'] = Category::where('parent_id', 0)->get();
         return view('categories.create', $data);
     }
 
@@ -87,7 +90,8 @@ class CategoryController extends Controller
         $category = [
             'name' => $request->name,
             'description' => $request->description,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
+            'parent_id' => $request->parent_id
         ];
 
         $update = Category::find($id)->update($category);
