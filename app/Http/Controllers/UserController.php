@@ -89,7 +89,7 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:60',
-            'email' => 'required|unique:users'
+            'email' => 'required|unique:users,name,'.$id
         ]);
 
         if ($request->has('password')) {
