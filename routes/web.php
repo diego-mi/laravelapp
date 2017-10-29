@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route:: group(['prefix' => ''], function(){
+Route::group(['prefix' => ''], function(){
     Route::resource('users', 'UserController');
+
+    Route::resource('categories', 'CategoryController');
 });
 Auth::routes();
 
