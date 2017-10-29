@@ -46,6 +46,7 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                            <li><a href="{{ URL('transactions') }}">Transaçoes</a></li>
                             <li><a href="{{ URL('sources') }}">Origens</a></li>
                             <li><a href="{{ URL('categories') }}">Categorias</a></li>
                             <li><a href="{{ URL('users') }}">Usuários</a></li>
