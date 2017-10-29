@@ -38,6 +38,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|unique:categories|max:60',
+            'description' => 'required'
+        ]);
+
         $category = [
             'name' => $request->name,
             'description' => $request->description,
@@ -87,6 +92,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|unique:categories|max:60',
+            'description' => 'required'
+        ]);
+
         $category = [
             'name' => $request->name,
             'description' => $request->description,
