@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route:: group(['prefix' => ''], function(){
-    Route::resource('users', 'LearnController');
+    Route::resource('users', 'UserController');
 });
 Auth::routes();
 
