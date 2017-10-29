@@ -28,34 +28,42 @@
                 @endif
 
 
-                <h2>Origens</h2>
+                <h2>Transaçoes</h2>
 
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered">
                         <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nome</th>
-                            <th>Valor Inicial</th>
-                            <th>Valor Atual</th>
                             <th>Descrição</th>
-                            <th><a href="{{URL('sources/create')}}" class="btn btn-xs btn-success">New</a></th>
+                            <th>Valor da Compra</th>
+                            <th>Valor Pago</th>
+                            <th>Data de Vencimento</th>
+                            <th>Data do Pagamento</th>
+                            <th>Origem</th>
+                            <th>Categoria</th>
+                            <th><a href="{{URL('transactions/create')}}" class="btn btn-xs btn-success">New</a></th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($sources as $key => $source)
+                        @foreach($transactions as $key => $transaction)
                             <tr>
-                                <td>{{$source->id}}</td>
-                                <td>{{$source->name}}</td>
-                                <td>{{$source->initial_balance}}</td>
-                                <td>{{$source->current_balance}}</td>
-                                <td>{{$source->description}}</td>
+                                <td>{{$transaction->id}}</td>
+                                <td>{{$transaction->description}}</td>
+                                <td>{{$transaction->prince}}</td>
+                                <td>{{$transaction->prince_paid}}</td>
+                                <td>{{$transaction->due_date}}</td>
+                                <td>{{$transaction->payment_date}}</td>
+                                <td>{{$transaction->type}}</td>
+                                <td>{{$transaction->source_id}}</td>
+                                <td>{{$transaction->user_id}}</td>
+                                <td>{{$transaction->category_id}}</td>
                                 <td>
                                     <center>
-                                        <a href="{{URL('sources/'.$source->id.'/edit')}}"
+                                        <a href="{{URL('transactions/'.$transaction->id.'/edit')}}"
                                            class="btn btn-xs btn-info">Editar</a>
 
-                                        <form action="{{URL('sources/'.$source->id)}}" method="POST">
+                                        <form action="{{URL('transactions/'.$transactions->id)}}" method="POST">
                                             {{csrf_field()}}
                                             {{method_field('DELETE')}}
                                             <button class="btn btn-xs btn-danger">Remover</button>
