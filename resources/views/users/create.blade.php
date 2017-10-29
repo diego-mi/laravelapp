@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="input-email">Nome:</label>
+                        <label for="input-email">Email:</label>
                         <input type="email" id="input-email" name="email" placeholder="Email" class="form-control" value="{{isset($user) ? $user->email : ''}}">
                     </div>
 
