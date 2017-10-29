@@ -16,6 +16,18 @@
                     </div>
                 @endif
 
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
 
                 <form action="{{URL('sources')}}{{isset($source) ? '/' . $source->id : ''}}" method="POST">
                     {{csrf_field()}}
@@ -43,14 +55,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="input-initial_value">Valor Inicial:</label>
-                        <input type="text" id="input-initial_value" name="initial_value" placeholder="Valor Inicial" class="form-control" value="{{isset($source) ? $source->initial_value : ''}}">
+                        <label for="input-initial_balance">Valor Inicial:</label>
+                        <input type="text" id="input-initial_balance" name="initial_balance" placeholder="Valor Inicial" class="form-control" value="{{isset($source) ? $source->initial_balance : ''}}">
 
                         @if ($errors->any())
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <ul>
-                                    @foreach ($errors->get('initial_value') as $error)
+                                    @foreach ($errors->get('initial_balance') as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>

@@ -28,7 +28,7 @@
                 @endif
 
 
-                <h2>Usuários</h2>
+                <h2>Origens</h2>
 
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered">
@@ -36,22 +36,26 @@
                         <tr>
                             <th>Id</th>
                             <th>Nome</th>
-                            <th>Email</th>
-                            <th><a href="{{URL('users/create')}}" class="btn btn-xs btn-success">New</a></th>
+                            <th>Valor Inicial</th>
+                            <th>Valor Atual</th>
+                            <th>Descrição</th>
+                            <th><a href="{{URL('sources/create')}}" class="btn btn-xs btn-success">New</a></th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $key => $user)
+                        @foreach($sources as $key => $source)
                             <tr>
-                                <td>{{($key+1)}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
+                                <td>{{$source->id}}</td>
+                                <td>{{$source->name}}</td>
+                                <td>{{$source->initial_balance}}</td>
+                                <td>{{$source->current_balance}}</td>
+                                <td>{{$source->description}}</td>
                                 <td>
                                     <center>
-                                        <a href="{{URL('users/'.$user->id.'/edit')}}"
+                                        <a href="{{URL('sources/'.$source->id.'/edit')}}"
                                            class="btn btn-xs btn-info">Editar</a>
 
-                                        <form action="{{URL('users/'.$user->id)}}" method="POST">
+                                        <form action="{{URL('sources/'.$source->id)}}" method="POST">
                                             {{csrf_field()}}
                                             {{method_field('DELETE')}}
                                             <button class="btn btn-xs btn-danger">Remover</button>
