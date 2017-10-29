@@ -10,7 +10,7 @@
                 @endif
 
 
-                <h2>Usuários</h2>
+                <h2>Categorias</h2>
 
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered">
@@ -18,22 +18,22 @@
                         <tr>
                             <th>Id</th>
                             <th>Nome</th>
-                            <th>Email</th>
-                            <th><a href="{{URL('users/create')}}" class="btn btn-xs btn-success">New</a></th>
+                            <th>Descrição</th>
+                            <th><a href="{{URL('categories/create')}}" class="btn btn-xs btn-success">New</a></th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $key => $user)
+                        @foreach($categories as $key => $category)
                             <tr>
                                 <td>{{($key+1)}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
+                                <td>{{$category->name}}</td>
+                                <td>{{$category->description}}</td>
                                 <td>
                                     <center>
-                                        <a href="{{URL('users/'.$user->id.'/edit')}}"
+                                        <a href="{{URL('categories/'.$category->id.'/edit')}}"
                                            class="btn btn-xs btn-info">Editar</a>
 
-                                        <form action="{{URL('users/'.$user->id)}}" method="POST">
+                                        <form action="{{URL('categories/'.$category->id)}}" method="POST">
                                             {{csrf_field()}}
                                             {{method_field('DELETE')}}
                                             <button class="btn btn-xs btn-danger">Remover</button>
