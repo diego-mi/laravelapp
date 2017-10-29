@@ -14,7 +14,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $data['transactions'] = Transaction::with(['category', 'source', 'user'])->get();;
+        return view('transactions.list', $data);
     }
 
     /**
