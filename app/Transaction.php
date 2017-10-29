@@ -12,6 +12,29 @@ class Transaction extends Model
      * @var array
      */
     protected $fillable = [
-        'description', 'prince', 'prince_paid', 'due_date', 'payment_date','type','source_id','user_id','category_id',
+        'description',
+        'prince',
+        'prince_paid',
+        'due_date',
+        'payment_date',
+        'type',
+        'source_id',
+        'user_id',
+        'category_id',
     ];
+
+    public function category()
+    {
+        return $this->hasOne('App\Category');
+    }
+
+    public function source()
+    {
+        return $this->hasOne('App\Source');
+    }
+
+    public function user()
+    {
+        return $this->hasOne('App\User');
+    }
 }
