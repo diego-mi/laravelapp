@@ -6,7 +6,25 @@
             <div class="col-md-12">
 
                 @if (Session::has('success'))
-                    <h3>{{Session::get('success')}}</h3>
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <ul>
+                            <li>{{Session::get('success')}}</li>
+                        </ul>
+                    </div>
+                @endif
+
+                @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
 
 
