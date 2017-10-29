@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Source;
 use App\Transaction;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
+
+    const ARR_TYPES = ['Dinheiro', 'Cartão de Crédito', 'Conta Corrente', 'Empréstimo', 'Transferência'];
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +30,11 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        $data['categories'] = Category::all();
+        $data['sources'] = Source::all();
+        $data['types'] = self::ARR_TYPES;
+
+        return view('transactions.create', $data);
     }
 
     /**
