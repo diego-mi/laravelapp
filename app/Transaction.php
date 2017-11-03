@@ -25,16 +25,16 @@ class Transaction extends Model
 
     public function category()
     {
-        return $this->hasOne('App\Category');
+        return $this->belongsTo('App\Category');
     }
 
     public function source()
     {
-        return $this->hasOne('App\Source');
+        return $this->belongsTo('App\Source');
     }
 
     public function user()
     {
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User');
     }
 }

@@ -6,6 +6,7 @@ use App\Category;
 use App\Source;
 use App\Transaction;
 use Illuminate\Http\Request;
+use Auth;
 
 class TransactionController extends Controller
 {
@@ -45,7 +46,34 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'description' => 'required',
+            'prince' => 'required',
+            'due_date' => 'required',
+            'type' => 'required',
+            'source_id' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        $data = [
+            'description' => $request->description,
+            'prince' => $request->prince,
+            'prince_paid' => $request->prince,
+            'due_date' => $request->due_date,
+            'payment_date' => $request->due_date,
+            'type' => $request->type,
+            'user_id' => Auth::user()->id,
+            'category_id' => $request->category_id,
+            'source_id' => $request->source_id
+        ];
+
+        $save = Transaction::insert($data);
+
+        if ($save) {
+            return redirect('transactions');
+        }
+
+        return redirect()->back()->withInput();
     }
 
     /**

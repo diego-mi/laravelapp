@@ -29,7 +29,7 @@
                 @endif
 
 
-                <form action="{{URL('tr')}}{{isset($transaction) ? '/' . $transaction->id : ''}}" method="POST">
+                <form action="{{URL('transactions')}}{{isset($transaction) ? '/' . $transaction->id : ''}}" method="POST">
                     {{csrf_field()}}
 
                     @if(isset($transaction))
@@ -124,8 +124,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="input-source_id">Tipo:</label>
-                        <select name="source_id" id="input-source_id" class="form-control">
+                        <label for="input-type">Tipo:</label>
+                        <select name="type" id="input-type" class="form-control">
                             <option value="">Escolha</option>
                             @foreach($types as $key => $typeItem)
                                 <option value="{{$key}}">{{$typeItem}}</option>

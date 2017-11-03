@@ -34,12 +34,14 @@
                     <table class="table table-hover table-bordered">
                         <thead>
                         <tr>
-                            <th>Id</th>
+                            {{--<th>Id</th>--}}
+                            <th>Responsavel</th>
                             <th>Descrição</th>
                             <th>Valor da Compra</th>
-                            <th>Valor Pago</th>
+                            {{--<th>Valor Pago</th>--}}
                             <th>Data de Vencimento</th>
-                            <th>Data do Pagamento</th>
+                            {{--<th>Data do Pagamento</th>--}}
+                            <th>Operaçao</th>
                             <th>Origem</th>
                             <th>Categoria</th>
                             <th><a href="{{URL('transactions/create')}}" class="btn btn-xs btn-success">New</a></th>
@@ -48,22 +50,22 @@
                         <tbody>
                         @foreach($transactions as $key => $transaction)
                             <tr>
-                                <td>{{$transaction->id}}</td>
+                                {{--<td>{{$transaction->id}}</td>--}}
+                                <td>{{$transaction->user->name}}</td>
                                 <td>{{$transaction->description}}</td>
                                 <td>{{$transaction->prince}}</td>
-                                <td>{{$transaction->prince_paid}}</td>
-                                <td>{{$transaction->due_date}}</td>
-                                <td>{{$transaction->payment_date}}</td>
+                                {{--<td>{{$transaction->prince_paid}}</td>--}}
+                                <td>{{(new DateTime($transaction->due_date))->format('d/m/y')}}</td>
+                                {{--<td>{{$transaction->payment_date}}</td>--}}
                                 <td>{{$transaction->type}}</td>
-                                <td>{{$transaction->source_id}}</td>
-                                <td>{{$transaction->user_id}}</td>
-                                <td>{{$transaction->category_id}}</td>
+                                <td>{{$transaction->source->name}}</td>
+                                <td>{{$transaction->category->name}}</td>
                                 <td>
                                     <center>
                                         <a href="{{URL('transactions/'.$transaction->id.'/edit')}}"
                                            class="btn btn-xs btn-info">Editar</a>
 
-                                        <form action="{{URL('transactions/'.$transactions->id)}}" method="POST">
+                                        <form action="{{URL('transactions/'.$transaction->id)}}" method="POST">
                                             {{csrf_field()}}
                                             {{method_field('DELETE')}}
                                             <button class="btn btn-xs btn-danger">Remover</button>
